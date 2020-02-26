@@ -1,0 +1,16 @@
+---
+contact:
+  enable: true
+  title: Contact Us
+  subtitle: Contact Details
+  content: How much wood could a wood chuck chuck if a wood chuck could chuck wood?
+  form_action: "#"
+  contact_details:
+  - icon: ti-location-pin
+    info: Khaja Road, Bayzid, Chittagong, Bangladesh
+  - icon: ti-mobile
+    info: 'Phone: +880-31-000-000'
+  - icon: ti-printer
+    info: 'Fax: +880-31-000-000'
+  - icon: ti-email
+    info: 'Email: hello@meghna.com'
