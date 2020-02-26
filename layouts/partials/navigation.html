@@ -1,56 +1,61 @@
-<section class="sticky-top navigation">
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-dark">
-			<a class="navbar-brand p-0" href="{{ .Site.BaseURL | relLangURL }}">
-				{{ if .Site.Params.logo }}
-				<img class="img-fluid" src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Title }}">
+
+<div data-sticky-container style="z-index:100" class="show-for-large">
+    <div data-sticky data-margin-top="0" class="top-sticky">
+        <div class="grid-x">
+            <div class="small-3 cell logo">
+            	<a href="{{ .Site.BaseURL }}">
+            	{{ if .Site.Params.logo }}
+				<img src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Title }}">
 				{{ else }}
 				{{ .Site.Title }}
 				{{ end }}
-			</a>
+            	</a>
+            </div>
+            <div class="small-9 cell">
+	            <ul class="dropdown menu main-menu" data-dropdown-menu>
+	            {{ $currentPage := . }}
+	            {{ range .Site.Menus.main }}
+	                {{ if .HasChildren }}
+	                    <li class="{{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+	                    <a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
 
-			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	                    <ul class="sub-menu">
+	                {{ range .Children }}
+	                    {{ if .HasChildren }}
+	                        <li class="{{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+	                        <a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
 
-			<div class="collapse navbar-collapse" id="navigation">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#body">{{ .Site.Params.home }}</a></li>
-					{{ if .IsHome }}
-					{{ range .Site.Menus.main }}
-					<li class="nav-item"><a class="nav-link" href="#{{ .URL }}">{{ .Name }}</a></li>
-					{{ end }}
-
-					{{ else }}
-
-					{{ range .Site.Menus.main }}
-					<li class="nav-item"><a class="nav-link" href="{{ $.Site.BaseURL | relLangURL }}#{{ .URL }}">{{ .Name }}</a>
-					</li>
-					{{ end }}
-					{{ end }}
-				</ul>
-				<!-- Language List -->
-				{{- if .Site.IsMultiLingual }}
-				<select id="select-language" onchange="location = this.value;">
-					{{ $siteLanguages := .Site.Languages}}
-					{{ $pageLang := .Page.Lang}}
-					{{ range .Page.AllTranslations }}
-					{{ $translation := .}}
-					{{ range $siteLanguages }}
-					{{ if eq $translation.Lang .Lang }}
-					{{ $selected := false }}
-					{{ if eq $pageLang .Lang}}
-					<option id="{{ $translation.Language }}" value="{{ $translation.Permalink }}" selected>{{ .LanguageName }}
-					</option>
-					{{ else }}
-					<option id="{{ $translation.Language }}" value="{{ $translation.Permalink }}">{{ .LanguageName }}</option>
-					{{ end }}
-					{{ end }}
-					{{ end }}
-					{{ end }}
-				</select>
-				{{ end }}
-			</div>
-		</nav>
-	</div>
-</section>
+	                        <ul class="sub-menu">
+	                    {{ range .Children }}
+	                        <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+	                        <a href="{{ .URL }}">{{ .Name }}</a>
+	                        </li>
+	                    {{ end }}
+	                        </ul>
+	                        </li>
+	                    {{ else }}
+	                        <li>
+	                        <a href="{{ .URL }}">
+	                        {{ .Pre }}
+	                        <span>{{ .Name }}</span>
+	                        </a>
+	                        </li>
+	                    {{ end }}
+	                {{ end }}
+	                    </ul>
+	                    </li>
+	                {{ else }}
+	                    <li>
+	                    <a href="{{ .URL }}">
+	                    {{ .Pre }}
+	                    <span>{{ .Name }}</span>
+	                    </a>
+	                    </li>
+	                {{ end }}
+	            {{ end }}
+	            </ul>
+             </div>   {{ "<!-- END NAV BAR DESKTOP -->" | safeHTML }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@
 	{{ "<!-- mobile responsive meta -->" | safeHTML }}
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="description"
-		content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+	content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
 	{{ with .Site.Params.author }}
 	<meta name="author" content="{{ . }}">{{ end }}
 	{{ hugo.Generator }}
@@ -19,8 +19,8 @@
 	{{ $styles := resources.Get "css/style.css" | minify}}
 	<link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 
-  {{"<!-- Custom stylesheet - for your changes -->" |safeHTML}}
-  <link rel="stylesheet" href="{{ "css/custom.css" | relURL}} " media="screen">
+	{{"<!-- Custom stylesheet - for your changes -->" |safeHTML}}
+	<link rel="stylesheet" href="{{ "css/custom.css" | relURL}} " media="screen">
 
 	{{ "<!--Favicon-->" | safeHTML }}
 	<link rel="shortcut icon" href="{{ `images/favicon.png` | absURL }} " type="image/x-icon">
